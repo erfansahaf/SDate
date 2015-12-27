@@ -1,6 +1,6 @@
 <?php
 /* If you use Codeigniter framework, uncomment following ↓ line */
-defined('BASEPATH') OR exit('No direct script access allowed');
+//defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
  * @name       Shamsi Date (SDate)
