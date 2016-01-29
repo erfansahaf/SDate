@@ -2,7 +2,7 @@
 This is an easy php class that can convert ` Gregorian ` date to ` Jalali ` (Shamsi) date by using [JDate] (http://jdf.scr.ir/rahnama/?t=jdate) php functions
 
 ## Use in Codeigniter 3
-for use in **Codeginiter 3** framework, you must copy SDate.php to `Application/libraries/SDate.php` path and push it into $autoload['libraries'] arras:
+for use in **Codeginiter 3** framework, you must copy SDate.php to `Application/libraries/SDate.php` path and push it into $autoload['libraries'] array:
 
 **application/config/autoload.php**
 ```
@@ -24,3 +24,5 @@ include 'SDate.php';
 $sdate = new SDate();
 $sdate->SOME_METHOD();
 ```
+
+method details will be updating...
