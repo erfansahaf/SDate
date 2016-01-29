@@ -1,2 +1,2 @@
-# sdate
-a php class for convert gregorian date to jalali (Shamsi) date
+# (S)amsi (Date)
+This is a php class for convert ` Gregorian ` date to ` Jalali ` (Shamsi) date
