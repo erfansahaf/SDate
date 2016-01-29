@@ -1,4 +1,4 @@
-> # (S)hamsi (Date)
+# (S)hamsi (Date)
 
 This is an easy php class that can convert ` Gregorian ` date to ` Jalali ` (Shamsi) date by using [JDate] (http://jdf.scr.ir/rahnama/?t=jdate) php functions
 
