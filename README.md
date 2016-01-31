@@ -11,7 +11,7 @@ for use in **Codeginiter 3** framework, you must copy SDate.php to `Application/
 ```php
 $autoload['libraries'] = array("sdate");
 ```
-also you can load this class in **your controller** instead autoload file:
+also you can load this class in **your controller** instead define in autoload file:
 ```php
 $this->load->library('sdate');
 ```
