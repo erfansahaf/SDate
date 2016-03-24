@@ -19,7 +19,7 @@ after load the class, you can access to SDate public methods and jdate functions
 ```php
 $this->sdate->SOME_METHOD();
 ```
-## Use in Native codes
+## Use in Pure codes
 
 It's very simple! just include SDate.php class and create an object from it:
 ```php
@@ -29,4 +29,4 @@ $sdate = new SDate();
 $sdate->SOME_METHOD();
 ```
 
-method details will be updating...
+method details will be update...
