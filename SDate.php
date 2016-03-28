@@ -29,7 +29,7 @@ class SDate {
      * @param string $date
      * @return string
      */
-    public function toShaDate($date = "2015-01-26",$outputLimiter = "/"){
+    public function toJalali($date = "2015-01-26",$outputLimiter = "/"){
         $date = $this->PersianToLatinNumber($date);
         $delimiter = substr($date,4,1);
         $en_date = explode($delimiter,$date);
@@ -44,7 +44,7 @@ class SDate {
      * @param string $date
      * @return string
      */
-    public function toGrDate($date = "1393/11/5",$outputLimiter = "/"){
+    public function toGregorian($date = "1393/11/5",$outputLimiter = "/"){
         $date = $this->persianToLatinNumber($date);
         $exploder = substr($date,4,1);
         $fa_date = explode($exploder,$date);
@@ -181,15 +181,15 @@ class SDate {
     }
 
     /*
-     * This function can detect (automatically) date format and convert to that one format (Sha || Gr)
+     * This function can detect (automatically) date format and convert to another format (Jalali || Gregorian)
      *
      */
     public function convertDate($date, $outputLimiter = "/"){
         $sub = substr($date,0,1);
         if($sub=="2")
-            return $this->toShaDate($date, $outputLimiter);
+            return $this->toJalali($date, $outputLimiter);
         elseif($sub=="1")
-            return $this->toGrDate($date, $outputLimiter);
+            return $this->toGregorian($date, $outputLimiter);
         else
             return null;
     }
