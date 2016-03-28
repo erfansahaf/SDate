@@ -22,6 +22,8 @@ class SDate {
     public function __construct(){
         date_default_timezone_set("Asia/Tehran");
     }
+    
+    
 
     /*
      * This function can convert Gregorian string date format to Shamsi date
