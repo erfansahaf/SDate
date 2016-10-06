@@ -1,3 +1,5 @@
+[![StyleCI](https://styleci.io/repos/48645021/shield?branch=master)](https://styleci.io/analyses/XpRWK2#)
+
 # (S)hamsi (Date)
 
 This is an easy php class that can convert ` Gregorian ` date to ` Jalali ` (Shamsi) date by using [JDate] (http://jdf.scr.ir/rahnama/?t=jdate) php functions
