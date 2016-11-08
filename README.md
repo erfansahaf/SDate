@@ -1,4 +1,3 @@
-[![StyleCI](https://styleci.io/repos/48645021/shield?branch=master)](https://styleci.io/analyses/XpRWK2#)
 
 # (S)hamsi (Date)
 
@@ -30,5 +29,3 @@ include 'SDate.php';
 $sdate = new SDate();
 $sdate->SOME_METHOD();
 ```
-
-method details will be update...
