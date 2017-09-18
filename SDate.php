@@ -1,6 +1,6 @@
 <?php
 
-/* If you use Codeigniter framework, uncomment following ↓ line */
+/* If you are using Codeigniter framework, uncomment following ↓ line */
 //defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
@@ -13,12 +13,12 @@
 */
 
 
-// This class use jdate functions for covert date
+// SDate is a class which has written to make date convertation easier.
 class SDate
 {
     /*
      * Initialize SDate Class
-     * Set timezone (Tehran-Iran)
+     * Set timezone (Asia / Tehran)
      */
     public function __construct()
     {
@@ -26,59 +26,58 @@ class SDate
     }
 
     /*
-     * This function can convert Gregorian string date format to Shamsi date
+     * Convert Gregorian date (string) to Shamsi (Jalaali)
      *
-     * @param string $date
+     * @param string $date. example: '2015-01-26'
      * @return string
      */
-    public function toJalali($date = '2015-01-26', $outputLimiter = '/')
+    public function toJalali($date, $outputdedelimiter = '/')
     {
         $date = $this->PersianToLatinNumber($date);
-        $delimiter = substr($date, 4, 1);
-        $en_date = explode($delimiter, $date);
-        $result = $this->gregorian_to_jalali($en_date[0], $en_date[1], $en_date[2], $outputLimiter);
+        $dedelimiter = substr($date, 4, 1);
+        $en_date = explode($dedelimiter, $date);
+        $result = $this->gregorian_to_jalali($en_date[0], $en_date[1], $en_date[2], $outputdedelimiter);
 
         return $result;
     }
 
     /*
-     * This function can convert Shamsi string date format, to Gregorian date
-     * Input string date limiter is not important
+     * Convert Shamsi (Jalaali) date to Gregorian
+     * Input string date delimiter is not important
      *
-     * @param string $date
+     * @param string $date. example: '1393/11/5'
      * @return string
      */
-    public function toGregorian($date = '1393/11/5', $outputLimiter = '/')
+    public function toGregorian($date, $outputdedelimiter = '/')
     {
         $date = $this->persianToLatinNumber($date);
         $exploder = substr($date, 4, 1);
         $fa_date = explode($exploder, $date);
-        $result = $this->jalali_to_gregorian($fa_date[0], $fa_date[1], $fa_date[2], $outputLimiter);
+        $result = $this->jalali_to_gregorian($fa_date[0], $fa_date[1], $fa_date[2], $outputdedelimiter);
 
         return $result;
     }
 
     /*
-     * This function use for get current date (today)
-     * Lang Param: en OR fa
+     * Get current date and time
      *
      * @param bool $includeTime
-     * @param string $lang
-     * @param string $limiter
+     * @param string $lang. (en|fa)
+     * @param string $delimiter
      *
      * @return string
      */
-    public function getDate($includeTime = false, $lang = 'en', $limiter = '-')
+    public function getDate($includeTime = false, $lang = 'en', $delimiter = '-')
     {
         if ($lang == 'fa') {
-            $str = 'Y'.$limiter.'n'.$limiter.'j';
+            $str = 'Y'.$delimiter.'n'.$delimiter.'j';
             if ($includeTime) {
                 return $this->persianToLatinNumber($this->jdate($str).' '.$this->getNowTime());
             } else {
                 return $this->persianToLatinNumber($this->jdate($str));
             }
         } elseif ($lang == 'en') {
-            $str = 'Y'.$limiter.'m'.$limiter.'d';
+            $str = 'Y'.$delimiter.'m'.$delimiter.'d';
             if ($includeTime) {
                 return date($str).' '.$this->getNowTime();
             } else {
@@ -90,7 +89,7 @@ class SDate
     }
 
     /*
-     * Function Usage: get current Persian (Shamsi) Month name
+     * Get current month name (Shamsi) in Persian
      *
      * @return string
      */
@@ -100,7 +99,7 @@ class SDate
     }
 
     /*
-     * Function Usage: get current Persian (Shamsi) Season name
+     * Get current season name (Shamsi) in Persian
      *
      * @return string
      */
@@ -110,18 +109,18 @@ class SDate
     }
 
     /*
-     * This function can be use for get Year,Month or day from date string
+     * Get Year, Month or day from a date
      * If flag = 1, function will return Year
      * If flag = 2, function will return Month
      * If flag = 3, function will return Day
      *
      * @param string $date
-     * @param int flag
+     * @param int $flag
      */
     public function getYearMonthDay($date = '1393/11/5', $flag = 1)
     {
-        $limiter = substr($date, 4, 1);
-        $date = explode($limiter, $date);
+        $delimiter = substr($date, 4, 1);
+        $date = explode($delimiter, $date);
         // Return Year
         if ($flag == 1) {
             $date = $date[0];
@@ -139,7 +138,7 @@ class SDate
     }
 
     /*
-     * This function can covert persian numbers (character) to latin numbers (character)
+     * Covert Persian numbers to Latin numbers
      *
      * @param string $string
      *
@@ -151,7 +150,7 @@ class SDate
     }
 
     /*
-     * Normal Date function (Hour:Minute:Second)
+     * Get current time (Hour:Minute:Second)
      *
      * @return string
      */
@@ -161,7 +160,8 @@ class SDate
     }
 
     /*
-     * This function can separate date format from a string
+     * Find and get Gregorian date from a string
+	 *
      * @param string $string
      * @return string date
      */
@@ -174,14 +174,15 @@ class SDate
     }
 
     /*
-     * This function can extract date and time from another
-     * Also this function can detect type of date (Gregorian or Jalali) and convert it to another
+     * Explode date and time from each other
+     * Also this function can detect type of date (Gregorian or Jalali) and convert it automatically
+	 *
      * @param string $DateTime
      * @param bool $convertDate
-     * @param string $outputLimiter
+     * @param string $outputdedelimiter
      * @return mixed array consist "date" and "time" indexes
      */
-    public function separateDateAndTime($DateTime, $convertDate = false, $outputLimiter = '/')
+    public function separateDateAndTime($DateTime, $convertDate = false, $outputdedelimiter = '/')
     {
         $DateTime = explode(' ', $DateTime);
         $DateTime['date'] = $DateTime[0];
@@ -189,7 +190,7 @@ class SDate
         if ($convertDate) {
             $date = $DateTime[0];
             unset($DateTime[0], $DateTime[1]);
-            $DateTime['date'] = $this->convertDate($date, $outputLimiter);
+            $DateTime['date'] = $this->convertDate($date, $outputdedelimiter);
         } else {
             unset($DateTime[0], $DateTime[1]);
         }
@@ -198,23 +199,23 @@ class SDate
     }
 
     /*
-     * This function can detect (automatically) date format and convert to another format (Jalali || Gregorian)
+     * This function can detect date format and convert to another format (Jalali|Gregorian)
      *
      */
-    public function convertDate($date, $outputLimiter = '/')
+    public function convertDate($date, $outputdedelimiter = '/')
     {
         $sub = substr($date, 0, 1);
         if ($sub == '2') {
-            return $this->toJalali($date, $outputLimiter);
+            return $this->toJalali($date, $outputdedelimiter);
         } elseif ($sub == '1') {
-            return $this->toGregorian($date, $outputLimiter);
+            return $this->toGregorian($date, $outputdedelimiter);
         } else {
             return;
         }
     }
 
     /*
-     * This function can sum or sub Year, Month, Date with your value
+     * This function can sum or sub Year, Month or Date with given value
      * for example: 2 days later -> editDate("2015-11-10", "2", "days", "+"); => Result: 2015-11-12
      * this function only support Y-m-d format
      * if date was empty, current date replace with your date
